@@ -925,12 +925,12 @@ pre .javascript .function {
 }
 @media (min-width: 1200px) {
   .main-inner {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .main-inner {
-    width: 73%;
+    width: 85%;
   }
 }
 @media (max-width: 767px) {
@@ -947,12 +947,12 @@ pre .javascript .function {
 }
 @media (min-width: 1200px) {
   .header-inner {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .header-inner {
-    width: 73%;
+    width: 85%;
   }
 }
 .site-brand-container {
@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8c85ff;
+  background: #cc8a32;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1386,12 +1386,12 @@ pre .javascript .function {
 }
 @media (min-width: 1200px) {
   .footer-inner {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .footer-inner {
-    width: 73%;
+    width: 85%;
   }
 }
 .languages {
@@ -2259,12 +2259,12 @@ mjx-container + br {
 }
 @media (min-width: 1200px) {
   .header {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .header {
-    width: 73%;
+    width: 85%;
   }
 }
 @media (max-width: 991px) {
@@ -2274,7 +2274,7 @@ mjx-container + br {
 }
 .header-inner {
   background: var(--content-bg-color);
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 30px 30px 30px 30px;
   box-shadow: initial;
   overflow: hidden;
   padding: 0;
@@ -2307,7 +2307,7 @@ mjx-container + br {
 }
 .content-wrap {
   background: var(--content-bg-color);
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 30px 30px 30px 30px;
   box-shadow: initial;
   box-sizing: border-box;
   padding: 40px;
@@ -2465,7 +2465,7 @@ mjx-container + br {
 }
 .sidebar-inner {
   background: var(--content-bg-color);
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: initial;
   box-sizing: border-box;
   color: var(--text-color);
@@ -2554,6 +2554,7 @@ body {
   background: url("/images/background.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
+  background-size: cover;
   background-position: 100% 100%;
 }
 .content-wrap {
