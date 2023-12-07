@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>起床困难综合症</title>
+    <url>/2023/12/07/%E8%B5%B7%E5%BA%8A%E5%9B%B0%E9%9A%BE%E7%BB%BC%E5%90%88%E7%97%87/</url>
+    <content><![CDATA[<h2 id="题目链接">题目链接</h2>
+<p><span class="math inline">\(--&gt;\)</span>
+<a href="https://www.acwing.com/problem/content/1000/"> 传送门</a></p>
+<h2 id="题目大意">题目大意</h2>
+<p><span class="math inline">\(drd\)</span> 的防御战线由 <span class="math inline">\(n\)</span> 扇防御门组成。</p>
+<p>每扇防御门包括一个运算 <span class="math inline">\(op\)</span>
+和一个参数 <span class="math inline">\(t\)</span>，其中运算一定是 <span class="math inline">\(OR,XOR,AND\)</span>
+中的一种，参数则一定为非负整数。如果还未通过防御门时攻击力为 <span class="math inline">\(x\)</span>，则其通过这扇防御门后攻击力将变为 <span class="math inline">\(x\)</span> <span class="math inline">\(op\)</span>
+<span class="math inline">\(t\)</span>。</p>
+<p>最终 <span class="math inline">\(drd\)</span>
+受到的伤害为对方初始攻击力 <span class="math inline">\(x\)</span>
+依次经过所有 <span class="math inline">\(n\)</span>
+扇防御门后转变得到的攻击力。</p>
+<p>由于 <span class="math inline">\(atm\)</span>
+水平有限，他的初始攻击力只能为 <span class="math inline">\(0\)</span> 到
+<span class="math inline">\(m\)</span>
+之间的一个整数（即他的初始攻击力只能在 <span class="math inline">\(0,1,…,m\)</span>
+中任选，但在通过防御门之后的攻击力不受 <span class="math inline">\(m\)</span> 的限制）。</p>
+<p>为了节省体力，他希望通过选择合适的初始攻击力使得他的攻击能让 <span class="math inline">\(drd\)</span>
+受到最大的伤害，请你帮他计算一下，他的一次攻击最多能使 <span class="math inline">\(drd\)</span> 受到多少伤害。</p>
+<h2 id="输入样例">输入样例</h2>
+<blockquote>
+<p><span class="math inline">\(3\)</span> <span class="math inline">\(10\)</span> <br> <span class="math inline">\(AND\)</span> <span class="math inline">\(5\)</span> <br> <span class="math inline">\(OR\)</span> <span class="math inline">\(6\)</span>
+<br> <span class="math inline">\(XOR\)</span> <span class="math inline">\(7\)</span></p>
+</blockquote>
+<h2 id="输出样例">输出样例</h2>
+<blockquote>
+<p><span class="math inline">\(1\)</span></p>
+</blockquote>
+<h2 id="思路">思路</h2>
+<p>位运算的主要特点之一就是在二进制表示下不进位，因此，每一位是否为
+<span class="math inline">\(1\)</span> 是独立的。<strong><span class="math inline">\(ans\)</span> 的第 <span class="math inline">\(k\)</span> 位只与 <span class="math inline">\(x_o\)</span> 的第 <span class="math inline">\(k\)</span> 位有关。</strong></p>
+<p><strong>由此，我们从高位到低位依次考虑每一位填 <span class="math inline">\(1\)</span> 还是 <span class="math inline">\(0\)</span>。</strong></p>
+<p>这相当于在 <span class="math inline">\(m\)</span>
+范围内造出一个符合条件的最大数字 <span class="math inline">\(ans\)</span>，这就要 <span class="math inline">\(ans\)</span> 的每一位尽可能的为 <span class="math inline">\(1\)</span>。而满足填 <span class="math inline">\(1\)</span>
+的条件则是，<strong>已经填好更高位构成的数值加上当前第 <span class="math inline">\(k\)</span> 位的 <span class="math inline">\(1
+&lt;&lt; k\)</span> 不超过 <span class="math inline">\(m\)</span>，同时当前位置放 <span class="math inline">\(1\)</span> 的贡献大于放 <span class="math inline">\(0\)</span> 的</strong></p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cal</span><span class="params">(<span class="type">int</span> bit,<span class="type">int</span> now)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">		<span class="type">int</span> x = a[i].second &gt;&gt; bit &amp; <span class="number">1</span>;</span><br><span class="line">		string str = a[i].first;</span><br><span class="line">		<span class="keyword">if</span>(str == <span class="string">&quot;AND&quot;</span>) now &amp;= x;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(str == <span class="string">&quot;OR&quot;</span>) now |= x;</span><br><span class="line">		<span class="keyword">else</span> now ^= x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;  i &lt;= n; i ++)&#123;</span><br><span class="line">		string s;<span class="type">int</span> x;</span><br><span class="line">		cin &gt;&gt; s &gt;&gt; x;</span><br><span class="line">		a[i] = &#123;s,x&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> val = <span class="number">0</span>,ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">29</span>; i &gt;= <span class="number">0</span> ; i --)&#123;</span><br><span class="line">		<span class="type">int</span> res1 = <span class="built_in">cal</span>(i,<span class="number">1</span>),res0 = <span class="built_in">cal</span>(i,<span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(val + (<span class="number">1</span> &lt;&lt; i) &lt;= m &amp;&amp; res0 &lt; res1)&#123;</span><br><span class="line">			ans += res1 &lt;&lt; i,val += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> ans += res0 &lt;&lt; i;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法竞赛</category>
+      </categories>
+      <tags>
+        <tag>二进制状态压缩</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>白华</title>
     <url>/2023/12/06/%E7%99%BD%E5%8D%8E/</url>
     <content><![CDATA[<p>以我的笔名 叙述新开始</p>
@@ -74,56 +124,6 @@ user.name "你的Github用户名" git config --global user.email
       </categories>
       <tags>
         <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>起床困难综合症</title>
-    <url>/2023/12/07/%E8%B5%B7%E5%BA%8A%E5%9B%B0%E9%9A%BE%E7%BB%BC%E5%90%88%E7%97%87/</url>
-    <content><![CDATA[<h2 id="题目链接">题目链接</h2>
-<p><span class="math inline">\(--&gt;\)</span>
-<a href="https://www.acwing.com/problem/content/1000/"> 传送门</a></p>
-<h2 id="题目大意">题目大意</h2>
-<p><span class="math inline">\(drd\)</span> 的防御战线由 <span class="math inline">\(n\)</span> 扇防御门组成。</p>
-<p>每扇防御门包括一个运算 <span class="math inline">\(op\)</span>
-和一个参数 <span class="math inline">\(t\)</span>，其中运算一定是 <span class="math inline">\(OR,XOR,AND\)</span>
-中的一种，参数则一定为非负整数。如果还未通过防御门时攻击力为 <span class="math inline">\(x\)</span>，则其通过这扇防御门后攻击力将变为 <span class="math inline">\(x\)</span> <span class="math inline">\(op\)</span>
-<span class="math inline">\(t\)</span>。</p>
-<p>最终 <span class="math inline">\(drd\)</span>
-受到的伤害为对方初始攻击力 <span class="math inline">\(x\)</span>
-依次经过所有 <span class="math inline">\(n\)</span>
-扇防御门后转变得到的攻击力。</p>
-<p>由于 <span class="math inline">\(atm\)</span>
-水平有限，他的初始攻击力只能为 <span class="math inline">\(0\)</span> 到
-<span class="math inline">\(m\)</span>
-之间的一个整数（即他的初始攻击力只能在 <span class="math inline">\(0,1,…,m\)</span>
-中任选，但在通过防御门之后的攻击力不受 <span class="math inline">\(m\)</span> 的限制）。</p>
-<p>为了节省体力，他希望通过选择合适的初始攻击力使得他的攻击能让 <span class="math inline">\(drd\)</span>
-受到最大的伤害，请你帮他计算一下，他的一次攻击最多能使 <span class="math inline">\(drd\)</span> 受到多少伤害。</p>
-<h2 id="输入样例">输入样例</h2>
-<blockquote>
-<p><span class="math inline">\(3\)</span> <span class="math inline">\(10\)</span> <br> <span class="math inline">\(AND\)</span> <span class="math inline">\(5\)</span> <br> <span class="math inline">\(OR\)</span> <span class="math inline">\(6\)</span>
-<br> <span class="math inline">\(XOR\)</span> <span class="math inline">\(7\)</span></p>
-</blockquote>
-<h2 id="输出样例">输出样例</h2>
-<blockquote>
-<p><span class="math inline">\(1\)</span></p>
-</blockquote>
-<h2 id="思路">思路</h2>
-<p>位运算的主要特点之一就是在二进制表示下不进位，因此，每一位是否为
-<span class="math inline">\(1\)</span> 是独立的。<strong><span class="math inline">\(ans\)</span> 的第 <span class="math inline">\(k\)</span> 位只与 <span class="math inline">\(x_o\)</span> 的第 <span class="math inline">\(k\)</span> 位有关。</strong></p>
-<p><strong>由此，我们从高位到低位依次考虑每一位填 <span class="math inline">\(1\)</span> 还是 <span class="math inline">\(0\)</span>。</strong></p>
-<p>这相当于在 <span class="math inline">\(m\)</span>
-范围内造出一个符合条件的最大数字 <span class="math inline">\(ans\)</span>，这就要 <span class="math inline">\(ans\)</span> 的每一位尽可能的为 <span class="math inline">\(1\)</span>。而满足填 <span class="math inline">\(1\)</span>
-的条件则是，<strong>已经填好更高位构成的数值加上当前第 <span class="math inline">\(k\)</span> 位的 <span class="math inline">\(1
-&lt;&lt; k\)</span> 不超过 <span class="math inline">\(m\)</span>，同时当前位置放 <span class="math inline">\(1\)</span> 的贡献大于放 <span class="math inline">\(0\)</span> 的</strong></p>
-<h2 id="代码">代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cal</span><span class="params">(<span class="type">int</span> bit,<span class="type">int</span> now)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">		<span class="type">int</span> x = a[i].second &gt;&gt; bit &amp; <span class="number">1</span>;</span><br><span class="line">		string str = a[i].first;</span><br><span class="line">		<span class="keyword">if</span>(str == <span class="string">&quot;AND&quot;</span>) now &amp;= x;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(str == <span class="string">&quot;OR&quot;</span>) now |= x;</span><br><span class="line">		<span class="keyword">else</span> now ^= x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;  i &lt;= n; i ++)&#123;</span><br><span class="line">		string s;<span class="type">int</span> x;</span><br><span class="line">		cin &gt;&gt; s &gt;&gt; x;</span><br><span class="line">		a[i] = &#123;s,x&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> val = <span class="number">0</span>,ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">29</span>; i &gt;= <span class="number">0</span> ; i --)&#123;</span><br><span class="line">		<span class="type">int</span> res1 = <span class="built_in">cal</span>(i,<span class="number">1</span>),res0 = <span class="built_in">cal</span>(i,<span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(val + (<span class="number">1</span> &lt;&lt; i) &lt;= m &amp;&amp; res0 &lt; res1)&#123;</span><br><span class="line">			ans += res1 &lt;&lt; i,val += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> ans += res0 &lt;&lt; i;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法竞赛</category>
-      </categories>
-      <tags>
-        <tag>二进制状态压缩</tag>
       </tags>
   </entry>
 </search>
