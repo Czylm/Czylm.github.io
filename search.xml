@@ -26,6 +26,77 @@ calc(N,M),因此改题目转化为求 <span class="math inline">\(calc(N,A)\)</s
       </tags>
   </entry>
   <entry>
+    <title>IP数据包分片重组</title>
+    <url>/2023/12/11/IP%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E7%89%87%E9%87%8D%E7%BB%84/</url>
+    <content><![CDATA[
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>网络层</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IncDec序列</title>
+    <url>/2023/12/14/IncDec%E5%BA%8F%E5%88%97/</url>
+    <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/102/">
+---&gt;传送门</a></p>
+<h3 id="题目大意">题目大意</h3>
+<p><img src="/2023/12/14/IncDec%E5%BA%8F%E5%88%97/image.png"></p>
+<h3 id="解题思路">解题思路</h3>
+<blockquote>
+<p>区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为
+<span class="math inline">\(0\)</span>，因此我们使用差分。先求出差分数组
+<span class="math inline">\(b\)</span>,分别统计正数和负数的大小。我们有四种操作：
+1. <span class="math inline">\(b_i\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((i,j)\)</span> 内的大小 2. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((1,j)\)</span> 内的大小 3. <span class="math inline">\(b_j\)</span> 和 <span class="math inline">\(b_{n +
+1}\)</span>，会改变 <span class="math inline">\((j,n + 1)\)</span>
+内的大小 4. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_{n + 1}\)</span> ，会改变整个数列的大小
+可以肯定的是，第四种是无用功，操作是不会改变相对大小，为了让相对大小尽可能的改变，我们最优先才去第一种操作，在一定
+<strong>区间内</strong>
+的大小相同的时候，就考虑左端点和右边界的差值以及右端点和左边界的差值，进行
+<span class="math inline">\(2、3\)</span> 操作。
+统计可以得出，最小的操作次数为 <span class="math inline">\(min(z,f) +
+\vert z - f\vert\)</span>，其中 <span class="math inline">\(f\)</span>
+为负数的绝对值。 能产生 <span class="math inline">\(\vert z -
+f\vert\)</span> + 1 中不同的 <span class="math inline">\(b_1\)</span>结果，即方案数。</p>
+</blockquote>
+<h3 id="代码实现">代码实现</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">	<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span>,<span class="title">b</span><span class="params">(n + <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">	    cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>;  i--)&#123;</span><br><span class="line">	    b[i] = a[i] - a[i <span class="number">-1</span> ];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ll z = <span class="number">0</span>, f = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">	    <span class="keyword">if</span>(b[i] &gt; <span class="number">0</span>) z += b[i];</span><br><span class="line">	    <span class="keyword">else</span> f += b[i];;</span><br><span class="line">	&#125;</span><br><span class="line">	f = -f;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">max</span>(z,f) &lt;&lt; endl &lt;&lt; <span class="built_in">abs</span>(z - f) + <span class="number">1</span> &lt;&lt; endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法进阶指南</category>
+      </categories>
+      <tags>
+        <tag>差分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Strange Towers of Hanoi</title>
+    <url>/2023/12/11/Strange-Towers-of-Hanoi/</url>
+    <content><![CDATA[<h2 id="题目大意">题目大意</h2>
+<blockquote>
+<p>解出 <span class="math inline">\(n\)</span> 个盒子 <span class="math inline">\(4\)</span> 座塔的汉诺塔问题最少需要多少次？</p>
+</blockquote>
+<h2 id="思路">思路</h2>
+<blockquote>
+<p>首先考虑 <span class="math inline">\(n\)</span> 个盒子 <span class="math inline">\(3\)</span> 座塔的经典汉诺塔问题，设 <span class="math inline">\(d[n]\)</span> 表示求解该 <span class="math inline">\(n\)</span> 题的最少步数，即把 <span class="math inline">\(n - 1\)</span> 个盒子从 <span class="math inline">\(A\)</span> 柱移动到 <span class="math inline">\(B\)</span> 柱，然后把第 <span class="math inline">\(n\)</span> 个盒子从 <span class="math inline">\(A\)</span> 柱移动到 <span class="math inline">\(C\)</span> 柱，然后把前 <span class="math inline">\(n - 1\)</span> 个盒子从 <span class="math inline">\(B\)</span> 柱移动到 <span class="math inline">\(C\)</span>
+柱子。四塔模式下，转化为三塔模式，先移动 <span class="math inline">\(i\)</span> 个，移动到 <span class="math inline">\(B\)</span> 柱子，将 <span class="math inline">\(n
+- i\)</span> 个盒子移动到 <span class="math inline">\(D\)</span>
+柱子，然后再把 <span class="math inline">\(i\)</span> 个盒子从 <span class="math inline">\(B\)</span> 柱移动到 <span class="math inline">\(D\)</span>
+柱子。<strong>就是将四塔转化为三塔，运用三塔的思维来进行解题</strong></p>
+</blockquote>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">22</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> d[N],f[N];<span class="comment">//三层和四层汉诺塔</span></span><br><span class="line"><span class="comment">//三层汉诺塔 d[n] = 2 * d[n - 1] + 1;</span></span><br><span class="line"><span class="comment">//四层汉诺塔，转化为三层汉诺塔问题</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">	d[<span class="number">1</span>] = f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= <span class="number">12</span>; i ++)&#123;</span><br><span class="line">        d[i] = <span class="number">2</span> * d[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">12</span>; i ++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j ++)&#123;</span><br><span class="line">            f[i] = <span class="built_in">min</span>(f[i],<span class="number">2</span> * f[j]  + d[i - j]);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; f[i] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法进阶指南</category>
+      </categories>
+      <tags>
+        <tag>递推</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Sumdiv</title>
     <url>/2023/12/12/Sumdiv/</url>
     <content><![CDATA[<p><a href> </a></p>
@@ -63,31 +134,6 @@ c\)</span>;</p>
       </tags>
   </entry>
   <entry>
-    <title>Strange Towers of Hanoi</title>
-    <url>/2023/12/11/Strange-Towers-of-Hanoi/</url>
-    <content><![CDATA[<h2 id="题目大意">题目大意</h2>
-<blockquote>
-<p>解出 <span class="math inline">\(n\)</span> 个盒子 <span class="math inline">\(4\)</span> 座塔的汉诺塔问题最少需要多少次？</p>
-</blockquote>
-<h2 id="思路">思路</h2>
-<blockquote>
-<p>首先考虑 <span class="math inline">\(n\)</span> 个盒子 <span class="math inline">\(3\)</span> 座塔的经典汉诺塔问题，设 <span class="math inline">\(d[n]\)</span> 表示求解该 <span class="math inline">\(n\)</span> 题的最少步数，即把 <span class="math inline">\(n - 1\)</span> 个盒子从 <span class="math inline">\(A\)</span> 柱移动到 <span class="math inline">\(B\)</span> 柱，然后把第 <span class="math inline">\(n\)</span> 个盒子从 <span class="math inline">\(A\)</span> 柱移动到 <span class="math inline">\(C\)</span> 柱，然后把前 <span class="math inline">\(n - 1\)</span> 个盒子从 <span class="math inline">\(B\)</span> 柱移动到 <span class="math inline">\(C\)</span>
-柱子。四塔模式下，转化为三塔模式，先移动 <span class="math inline">\(i\)</span> 个，移动到 <span class="math inline">\(B\)</span> 柱子，将 <span class="math inline">\(n
-- i\)</span> 个盒子移动到 <span class="math inline">\(D\)</span>
-柱子，然后再把 <span class="math inline">\(i\)</span> 个盒子从 <span class="math inline">\(B\)</span> 柱移动到 <span class="math inline">\(D\)</span>
-柱子。<strong>就是将四塔转化为三塔，运用三塔的思维来进行解题</strong></p>
-</blockquote>
-<h2 id="代码">代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">22</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> d[N],f[N];<span class="comment">//三层和四层汉诺塔</span></span><br><span class="line"><span class="comment">//三层汉诺塔 d[n] = 2 * d[n - 1] + 1;</span></span><br><span class="line"><span class="comment">//四层汉诺塔，转化为三层汉诺塔问题</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">	d[<span class="number">1</span>] = f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= <span class="number">12</span>; i ++)&#123;</span><br><span class="line">        d[i] = <span class="number">2</span> * d[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">12</span>; i ++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j ++)&#123;</span><br><span class="line">            f[i] = <span class="built_in">min</span>(f[i],<span class="number">2</span> * f[j]  + d[i - j]);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; f[i] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法进阶指南</category>
-      </categories>
-      <tags>
-        <tag>递推</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>http和DNS协议</title>
     <url>/2023/12/11/http%E5%92%8CDNS%E5%8D%8F%E8%AE%AE/</url>
     <content><![CDATA[<h2 id="http">http</h2>
@@ -104,49 +150,16 @@ c\)</span>;</p>
       </tags>
   </entry>
   <entry>
-    <title>IP数据包分片重组</title>
-    <url>/2023/12/11/IP%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E7%89%87%E9%87%8D%E7%BB%84/</url>
-    <content><![CDATA[
+    <title>markdown常用公式收纳</title>
+    <url>/2023/12/09/markdown%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E6%94%B6%E7%BA%B3/</url>
+    <content><![CDATA[<p>此文章收集学习当中用到的markdown语法知识，旨在方便查找以及记忆</p>
+<p>1.分数 2.绝对值(||) 3.上、下取整 </p>
 ]]></content>
       <categories>
-        <category>计算机网络</category>
+        <category>字典</category>
       </categories>
       <tags>
-        <tag>网络层</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IncDec序列</title>
-    <url>/2023/12/14/IncDec%E5%BA%8F%E5%88%97/</url>
-    <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/102/">
----&gt;传送门</a></p>
-<h3 id="题目大意">题目大意</h3>
-<p><img src="\IncDec序列/image.png"></p>
-<h3 id="解题思路">解题思路</h3>
-<blockquote>
-<p>区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为
-<span class="math inline">\(0\)</span>，因此我们使用差分。先求出差分数组
-<span class="math inline">\(b\)</span>,分别统计正数和负数的大小。我们有四种操作：
-1. <span class="math inline">\(b_i\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((i,j)\)</span> 内的大小 2. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((1,j)\)</span> 内的大小 3. <span class="math inline">\(b_j\)</span> 和 <span class="math inline">\(b_{n +
-1}\)</span>，会改变 <span class="math inline">\((j,n + 1)\)</span>
-内的大小 4. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_{n + 1}\)</span> ，会改变整个数列的大小
-可以肯定的是，第四种是无用功，操作是不会改变相对大小，为了让相对大小尽可能的改变，我们最优先才去第一种操作，在一定
-<strong>区间内</strong>
-的大小相同的时候，就考虑左端点和右边界的差值以及右端点和左边界的差值，进行
-<span class="math inline">\(2、3\)</span> 操作。
-统计可以得出，最小的操作次数为 <span class="math inline">\(min(z,f) +
-\vert z - f\vert\)</span>，其中 <span class="math inline">\(f\)</span>
-为负数的绝对值。 能产生 <span class="math inline">\(\vert z -
-f\vert\)</span> + 1 中不同的 <span class="math inline">\(b_1\)</span>结果，即方案数。</p>
-</blockquote>
-<h3 id="代码实现">代码实现</h3>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">	<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span>,<span class="title">b</span><span class="params">(n + <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">	    cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>;  i--)&#123;</span><br><span class="line">	    b[i] = a[i] - a[i <span class="number">-1</span> ];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ll z = <span class="number">0</span>, f = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">	    <span class="keyword">if</span>(b[i] &gt; <span class="number">0</span>) z += b[i];</span><br><span class="line">	    <span class="keyword">else</span> f += b[i];;</span><br><span class="line">	&#125;</span><br><span class="line">	f = -f;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">max</span>(z,f) &lt;&lt; endl &lt;&lt; <span class="built_in">abs</span>(z - f) + <span class="number">1</span> &lt;&lt; endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法进阶指南</category>
-      </categories>
-      <tags>
-        <tag>差分</tag>
+        <tag>markdown语法</tag>
       </tags>
   </entry>
   <entry>
@@ -220,23 +233,38 @@ user.name "你的Github用户名" git config --global user.email
       </tags>
   </entry>
   <entry>
-    <title>markdown常用公式收纳</title>
-    <url>/2023/12/09/markdown%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E6%94%B6%E7%BA%B3/</url>
-    <content><![CDATA[<p>此文章收集学习当中用到的markdown语法知识，旨在方便查找以及记忆</p>
-<p>1.分数 2.绝对值(||) 3.上、下取整 </p>
+    <title>最短Hamilton路径</title>
+    <url>/2023/12/10/%E6%9C%80%E7%9F%ADHamilton%E8%B7%AF%E5%BE%84/</url>
+    <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/93/"> ---&gt;
+传送门</a> ### 题目大意 &gt;给定一张 <span class="math inline">\(n\)</span> 个点的带权无向图，点从 <span class="math inline">\(0∼n−1\)</span> 标号，求起点 <span class="math inline">\(0\)</span> 到终点 <span class="math inline">\(n−1\)</span> 的最短 <span class="math inline">\(Hamilton\)</span> 路径。<span class="math inline">\(Hamilton\)</span> 路径的定义是从 <span class="math inline">\(0\)</span> 到 <span class="math inline">\(n−1\)</span> 不重不漏地经过每个点恰好一次。</p>
+<h3 id="思路">思路</h3>
+<blockquote>
+<p>暴力超时，所以考虑二进制、状态压缩等思路。在 <span class="math inline">\(1 &lt;&lt; n\)</span>
+的范围内的每一个数的二进制都是一种选择方案。<span class="math inline">\(0\)</span> 表示未到达， <span class="math inline">\(1\)</span>
+表示到达，枚举每一种方案中每一个点到达情况的状态转移。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> f[<span class="number">1</span> &lt;&lt; <span class="number">20</span>][<span class="number">22</span>],weight[<span class="number">22</span>][<span class="number">22</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            cin &gt;&gt; weight[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;<span class="comment">//多少种方案</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;<span class="comment">//到达哪个点</span></span><br><span class="line">            <span class="keyword">if</span> ((i &gt;&gt; j &amp; <span class="number">1</span>)) &#123;<span class="comment">//是否为 1，1则表示这个点已经走过</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;<span class="comment">//枚举哪些点到达 j, i -&gt; j --- k -&gt; j</span></span><br><span class="line">                    <span class="keyword">if</span> (i ^ (<span class="number">1</span> &lt;&lt; j) &gt;&gt; k &amp; <span class="number">1</span>) &#123;<span class="comment">//同理，找没到达j点的情况，从k走到j 1 ^ 1 = 0，将第j位变为0</span></span><br><span class="line">                        f[i][j] = <span class="built_in">min</span>(f[i][j], f[i ^ (<span class="number">1</span> &lt;&lt; j)][k] + weight[k][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; f[(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>][n - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>字典</category>
+        <category>算法进阶指南</category>
       </categories>
       <tags>
-        <tag>markdown语法</tag>
+        <tag>二进制状态压缩</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>白华</title>
+    <url>/2023/12/06/%E7%99%BD%E5%8D%8E/</url>
+    <content><![CDATA[<p>以我的笔名 叙述新开始</p>
+]]></content>
   </entry>
   <entry>
     <title>最高的牛</title>
     <url>/2023/12/14/%E6%9C%80%E9%AB%98%E7%9A%84%E7%89%9B/</url>
     <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/103/">
----&gt;传送门 </a> ### 题目大意 <img src="\最高的牛/image.png"></p>
+---&gt;传送门 </a></p>
+<h3 id="题目大意">题目大意</h3>
+<p><img src="\最高的牛/image.png"></p>
 <h3 id="思路">思路</h3>
 <blockquote>
 <p>题目中的 <span class="math inline">\(M\)</span>
@@ -268,7 +296,7 @@ user.name "你的Github用户名" git config --global user.email
 <a href="https://www.acwing.com/problem/content/description/101/">
 传送门</a></p>
 <h2 id="题目大意">题目大意</h2>
-<p><img src="\激光炸弹/image.png"></p>
+<p><img src="/2023/12/14/%E6%BF%80%E5%85%89%E7%82%B8%E5%BC%B9/image.png"></p>
 <h2 id="思路">思路</h2>
 <p><img src="/2023/12/14/%E6%BF%80%E5%85%89%E7%82%B8%E5%BC%B9/图解.png"> <img src="/2023/12/14/%E6%BF%80%E5%85%89%E7%82%B8%E5%BC%B9/图解2.png"> ##
 代码</p>
@@ -282,29 +310,39 @@ user.name "你的Github用户名" git config --global user.email
       </tags>
   </entry>
   <entry>
-    <title>白华</title>
-    <url>/2023/12/06/%E7%99%BD%E5%8D%8E/</url>
-    <content><![CDATA[<p>以我的笔名 叙述新开始</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>最短Hamilton路径</title>
-    <url>/2023/12/10/%E6%9C%80%E7%9F%ADHamilton%E8%B7%AF%E5%BE%84/</url>
-    <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/93/"> ---&gt;
-传送门</a> ### 题目大意 &gt;给定一张 <span class="math inline">\(n\)</span> 个点的带权无向图，点从 <span class="math inline">\(0∼n−1\)</span> 标号，求起点 <span class="math inline">\(0\)</span> 到终点 <span class="math inline">\(n−1\)</span> 的最短 <span class="math inline">\(Hamilton\)</span> 路径。<span class="math inline">\(Hamilton\)</span> 路径的定义是从 <span class="math inline">\(0\)</span> 到 <span class="math inline">\(n−1\)</span> 不重不漏地经过每个点恰好一次。</p>
-<h3 id="思路">思路</h3>
-<blockquote>
-<p>暴力超时，所以考虑二进制、状态压缩等思路。在 <span class="math inline">\(1 &lt;&lt; n\)</span>
-的范围内的每一个数的二进制都是一种选择方案。<span class="math inline">\(0\)</span> 表示未到达， <span class="math inline">\(1\)</span>
-表示到达，枚举每一种方案中每一个点到达情况的状态转移。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> f[<span class="number">1</span> &lt;&lt; <span class="number">20</span>][<span class="number">22</span>],weight[<span class="number">22</span>][<span class="number">22</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            cin &gt;&gt; weight[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;<span class="comment">//多少种方案</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;<span class="comment">//到达哪个点</span></span><br><span class="line">            <span class="keyword">if</span> ((i &gt;&gt; j &amp; <span class="number">1</span>)) &#123;<span class="comment">//是否为 1，1则表示这个点已经走过</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;<span class="comment">//枚举哪些点到达 j, i -&gt; j --- k -&gt; j</span></span><br><span class="line">                    <span class="keyword">if</span> (i ^ (<span class="number">1</span> &lt;&lt; j) &gt;&gt; k &amp; <span class="number">1</span>) &#123;<span class="comment">//同理，找没到达j点的情况，从k走到j 1 ^ 1 = 0，将第j位变为0</span></span><br><span class="line">                        f[i][j] = <span class="built_in">min</span>(f[i][j], f[i ^ (<span class="number">1</span> &lt;&lt; j)][k] + weight[k][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; f[(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>][n - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>第一章 基础算法</title>
+    <url>/2023/12/09/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>该篇主要做知识点总结，代码和题目在其他文章当中 # 一.位运算 ##
+1.算术位运算 &gt; 与 and &amp; &gt; 非 not ~ &gt; 或 or | &gt; 异或 xor
+^</p>
+<h2 id="补码">2.补码</h2>
+<p><span class="math inline">\(32\)</span> 位有符号整数 <span class="math inline">\(int\)</span> <span class="math inline">\(32\)</span> 位无符号整数 <span class="math inline">\(unsigned\)</span></p>
+<p><span class="math inline">\(int\)</span>
+溢出为负数的原因：最高位是符号位，溢出的数会使最高位为 <span class="math inline">\(1\)</span>,这个 <span class="math inline">\(1\)</span>表示负数。</p>
+<p>正数的补码是本身 负数的补码是反码 + 1</p>
+<p>正数的反码是本身 负数的反码是取反</p>
+<h2 id="移位换算">3.移位换算</h2>
+<p>算术左移：左移，低位以 <span class="math inline">\(0\)</span>
+填充，高位越界舍弃</p>
+<p><span class="math inline">\(1 &lt;&lt; n = 2 ^ n\)</span> <br> <span class="math inline">\(n &lt;&lt; 2n\)</span></p>
+<p>算术右移：右移，高位以符号位填充，低位越界舍弃 <span class="math inline">\(n &gt;&gt; 1 = \vert
+\frac{n}{2.0}\vert\)</span></p>
+<h2 id="二进制状态压缩">4.二进制状态压缩</h2>
+<p>1.可以使用一个 <span class="math inline">\(n\)</span>
+位的二进制数来表示在任意时刻哪些点走过，哪些点没走过。第 <span class="math inline">\(i\)</span> 位为 <span class="math inline">\(1\)</span> 表示已经走过。
+题型：二进制状态压缩、状压dp</p>
+<p>2.位运算的主要特点之一就是二进制不进位，换言之，二进制下的每一位的运算是独立的，两个数的二进制第
+<span class="math inline">\(i\)</span> 位的运算结果只取决于两个数的第
+<span class="math inline">\(i\)</span> 位
+因此我们可以通过这个性质造数字，在什么条件下满足这个范围内最大的数字是多少。我称之为填数字，在一定位数的二进制数下，填
+<span class="math inline">\(1\)</span> 还是填 <span class="math inline">\(0\)</span> 是最优的</p>
+<h1 id="二.递推和递归">二.递推和递归</h1>
 ]]></content>
       <categories>
-        <category>算法进阶指南</category>
+        <category>基础算法章节总结</category>
       </categories>
       <tags>
-        <tag>二进制状态压缩</tag>
+        <tag>知识总结</tag>
       </tags>
   </entry>
   <entry>
@@ -387,70 +425,6 @@ c_02^0)\)</span> 。</p>
       </tags>
   </entry>
   <entry>
-    <title>第一章 基础算法</title>
-    <url>/2023/12/09/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>该篇主要做知识点总结，代码和题目在其他文章当中 # 一.位运算 ##
-1.算术位运算 &gt; 与 and &amp; &gt; 非 not ~ &gt; 或 or | &gt; 异或 xor
-^</p>
-<h2 id="补码">2.补码</h2>
-<p><span class="math inline">\(32\)</span> 位有符号整数 <span class="math inline">\(int\)</span> <span class="math inline">\(32\)</span> 位无符号整数 <span class="math inline">\(unsigned\)</span></p>
-<p><span class="math inline">\(int\)</span>
-溢出为负数的原因：最高位是符号位，溢出的数会使最高位为 <span class="math inline">\(1\)</span>,这个 <span class="math inline">\(1\)</span>表示负数。</p>
-<p>正数的补码是本身 负数的补码是反码 + 1</p>
-<p>正数的反码是本身 负数的反码是取反</p>
-<h2 id="移位换算">3.移位换算</h2>
-<p>算术左移：左移，低位以 <span class="math inline">\(0\)</span>
-填充，高位越界舍弃</p>
-<p><span class="math inline">\(1 &lt;&lt; n = 2 ^ n\)</span> <br> <span class="math inline">\(n &lt;&lt; 2n\)</span></p>
-<p>算术右移：右移，高位以符号位填充，低位越界舍弃 <span class="math inline">\(n &gt;&gt; 1 = \vert
-\frac{n}{2.0}\vert\)</span></p>
-<h2 id="二进制状态压缩">4.二进制状态压缩</h2>
-<p>1.可以使用一个 <span class="math inline">\(n\)</span>
-位的二进制数来表示在任意时刻哪些点走过，哪些点没走过。第 <span class="math inline">\(i\)</span> 位为 <span class="math inline">\(1\)</span> 表示已经走过。
-题型：二进制状态压缩、状压dp</p>
-<p>2.位运算的主要特点之一就是二进制不进位，换言之，二进制下的每一位的运算是独立的，两个数的二进制第
-<span class="math inline">\(i\)</span> 位的运算结果只取决于两个数的第
-<span class="math inline">\(i\)</span> 位
-因此我们可以通过这个性质造数字，在什么条件下满足这个范围内最大的数字是多少。我称之为填数字，在一定位数的二进制数下，填
-<span class="math inline">\(1\)</span> 还是填 <span class="math inline">\(0\)</span> 是最优的</p>
-<h1 id="二.递推和递归">二.递推和递归</h1>
-]]></content>
-      <categories>
-        <category>基础算法章节总结</category>
-      </categories>
-      <tags>
-        <tag>知识总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>递归实现指数型枚举</title>
-    <url>/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8C%87%E6%95%B0%E5%9E%8B%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/A"> ---&gt;
-传送门</a></p>
-<h3 id="题目大意">题目大意</h3>
-<blockquote>
-<p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span>
-个整数随机选取任意多个，输出所有可能的选择方案</p>
-</blockquote>
-<h3 id="思路">思路</h3>
-<blockquote>
-<p>这等价于每个整数可以选或者不选，所有的方案总数共有 <span class="math inline">\(2 ^ n\)</span>
-种。我们用递归来进行求解。在每一次的递归当中分别尝试 <strong>选</strong>
-或者 <strong>不选</strong> 两条分支，将尚未确定的整数数量减少 <span class="math inline">\(1\)</span>，从而转化为一个规模更小的同类问题</p>
-</blockquote>
-<h3 id="时间复杂度">时间复杂度</h3>
-<blockquote>
-<p><span class="math inline">\(2 ^ n\)</span> <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//不选</span></span><br><span class="line">    vec.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//选</span></span><br><span class="line">    vec.<span class="built_in">pop_back</span>();<span class="comment">//还原现场</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>算法进阶指南</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>起床困难综合症</title>
     <url>/2023/12/07/%E8%B5%B7%E5%BA%8A%E5%9B%B0%E9%9A%BE%E7%BB%BC%E5%90%88%E7%97%87/</url>
     <content><![CDATA[<h2 id="题目链接">题目链接</h2>
@@ -501,24 +475,25 @@ c_02^0)\)</span> 。</p>
       </tags>
   </entry>
   <entry>
-    <title>递归实现排列型枚举</title>
-    <url>/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/C"> ---&gt;
+    <title>递归实现指数型枚举</title>
+    <url>/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8C%87%E6%95%B0%E5%9E%8B%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/A"> ---&gt;
 传送门</a></p>
 <h3 id="题目大意">题目大意</h3>
 <blockquote>
 <p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span>
-个整数排成一列后随机打乱顺序，输出所有可能的次序。</p>
+个整数随机选取任意多个，输出所有可能的选择方案</p>
 </blockquote>
 <h3 id="思路">思路</h3>
 <blockquote>
-<p>全排列，将一个大问题转换为小问题，即先考虑十个数的顺序，然后是久个不确定的数的顺序，再到八个乃至一个</p>
+<p>这等价于每个整数可以选或者不选，所有的方案总数共有 <span class="math inline">\(2 ^ n\)</span>
+种。我们用递归来进行求解。在每一次的递归当中分别尝试 <strong>选</strong>
+或者 <strong>不选</strong> 两条分支，将尚未确定的整数数量减少 <span class="math inline">\(1\)</span>，从而转化为一个规模更小的同类问题</p>
 </blockquote>
 <h3 id="时间复杂度">时间复杂度</h3>
 <blockquote>
-<p>!n 至 !n * n</p>
+<p><span class="math inline">\(2 ^ n\)</span> <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//不选</span></span><br><span class="line">    vec.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//选</span></span><br><span class="line">    vec.<span class="built_in">pop_back</span>();<span class="comment">//还原现场</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vis</span><span class="params">(<span class="number">21</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">            vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">calc</span>(x + <span class="number">1</span>);</span><br><span class="line">            vis[i] = <span class="number">0</span>;</span><br><span class="line">            vec.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法进阶指南</category>
@@ -548,6 +523,33 @@ c_02^0)\)</span> 。</p>
 <blockquote>
 <p><span class="math inline">\(C_n^m\)</span> <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(vec.<span class="built_in">size</span>() &gt; m || vec.<span class="built_in">size</span>() + (n - x + <span class="number">1</span>) &lt; m)&#123;<span class="comment">//剪枝</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vec.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//选</span></span><br><span class="line">    vec.<span class="built_in">pop_back</span>();<span class="comment">//还原现场</span></span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//不选</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>算法进阶指南</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>递归实现排列型枚举</title>
+    <url>/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/C"> ---&gt;
+传送门</a></p>
+<h3 id="题目大意">题目大意</h3>
+<blockquote>
+<p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span>
+个整数排成一列后随机打乱顺序，输出所有可能的次序。</p>
+</blockquote>
+<h3 id="思路">思路</h3>
+<blockquote>
+<p>全排列，将一个大问题转换为小问题，即先考虑十个数的顺序，然后是久个不确定的数的顺序，再到八个乃至一个</p>
+</blockquote>
+<h3 id="时间复杂度">时间复杂度</h3>
+<blockquote>
+<p>!n 至 !n * n</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vis</span><span class="params">(<span class="number">21</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">            vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">calc</span>(x + <span class="number">1</span>);</span><br><span class="line">            vis[i] = <span class="number">0</span>;</span><br><span class="line">            vec.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法进阶指南</category>

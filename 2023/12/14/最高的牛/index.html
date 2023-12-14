@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"czylm.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="---&gt;传送门  ### 题目大意  思路  题目中的 \(M\) 对关系给我们的信息实际上是牛之间身高的相对大小的关系，我们初始化一个数组 \(a\)，全部为 \(0\)，有一对关系内，我们就可以得知在 \((l,r)\) 内的牛要比端点矮，通过差分来映射出这个关系，我这个范围内的牛要比端点的至少低 \(1\)，最后每个牛的身高就是最高值与相对大小之和，即 \(h +">
+  <meta name="description" content="---&gt;传送门  题目大意  思路  题目中的 \(M\) 对关系给我们的信息实际上是牛之间身高的相对大小的关系，我们初始化一个数组 \(a\)，全部为 \(0\)，有一对关系内，我们就可以得知在 \((l,r)\) 内的牛要比端点矮，通过差分来映射出这个关系，我这个范围内的牛要比端点的至少低 \(1\)，最后每个牛的身高就是最高值与相对大小之和，即 \(h + a[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最高的牛">
 <meta property="og:url" content="https://czylm.github.io/2023/12/14/%E6%9C%80%E9%AB%98%E7%9A%84%E7%89%9B/index.html">
 <meta property="og:site_name" content="欢迎回家~">
-<meta property="og:description" content="---&gt;传送门  ### 题目大意  思路  题目中的 \(M\) 对关系给我们的信息实际上是牛之间身高的相对大小的关系，我们初始化一个数组 \(a\)，全部为 \(0\)，有一对关系内，我们就可以得知在 \((l,r)\) 内的牛要比端点矮，通过差分来映射出这个关系，我这个范围内的牛要比端点的至少低 \(1\)，最后每个牛的身高就是最高值与相对大小之和，即 \(h +">
+<meta property="og:description" content="---&gt;传送门  题目大意  思路  题目中的 \(M\) 对关系给我们的信息实际上是牛之间身高的相对大小的关系，我们初始化一个数组 \(a\)，全部为 \(0\)，有一对关系内，我们就可以得知在 \((l,r)\) 内的牛要比端点矮，通过差分来映射出这个关系，我这个范围内的牛要比端点的至少低 \(1\)，最后每个牛的身高就是最高值与相对大小之和，即 \(h + a[">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://czylm.github.io/%E6%9C%80%E9%AB%98%E7%9A%84%E7%89%9B/image.png">
 <meta property="article:published_time" content="2023-12-14T13:29:19.000Z">
-<meta property="article:modified_time" content="2023-12-14T13:40:22.392Z">
+<meta property="article:modified_time" content="2023-12-14T17:57:08.844Z">
 <meta property="article:author" content="Czylm">
 <meta property="article:tag" content="差分">
 <meta name="twitter:card" content="summary">
@@ -226,10 +226,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-12-14 21:29:19 / 修改时间：21:40:22" itemprop="dateCreated datePublished" datetime="2023-12-14T21:29:19+08:00">2023-12-14</time>
+              <time title="创建时间：2023-12-14 21:29:19" itemprop="dateCreated datePublished" datetime="2023-12-14T21:29:19+08:00">2023-12-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-15 01:57:08" itemprop="dateModified" datetime="2023-12-15T01:57:08+08:00">2023-12-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,7 +259,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>915</span>
+              <span>912</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -273,7 +279,9 @@
 
       
         <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/103/">
----&gt;传送门 </a> ### 题目大意 <img src="\最高的牛/image.png"></p>
+---&gt;传送门 </a></p>
+<h3 id="题目大意">题目大意</h3>
+<p><img src="\最高的牛/image.png"></p>
 <h3 id="思路">思路</h3>
 <blockquote>
 <p>题目中的 <span class="math inline">\(M\)</span>
@@ -386,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
