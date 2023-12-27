@@ -6,7 +6,7 @@
   <link href="https://czylm.github.io/atom.xml" rel="self"/>
   
   <link href="https://czylm.github.io/"/>
-  <updated>2023-12-19T12:12:51.771Z</updated>
+  <updated>2023-12-25T08:46:36.974Z</updated>
   <id>https://czylm.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>运输层</title>
+    <link href="https://czylm.github.io/2023/12/24/%E8%BF%90%E8%BE%93%E5%B1%82/"/>
+    <id>https://czylm.github.io/2023/12/24/%E8%BF%90%E8%BE%93%E5%B1%82/</id>
+    <published>2023-12-24T06:17:55.000Z</published>
+    <updated>2023-12-25T08:46:36.974Z</updated>
+    
+    <content type="html"><![CDATA[<p>运输层和网络层的联系和区别&gt;物理层、数据链路层以及网络层它们共同解决了将主机通过异构网络互联起来所面临的问题，实现了主机到主机的通信，但实际上，在计算机网络中进行通信的真正主体是位于通信两端主机中的进程，即两台主机的应用进程互相通信。因此运输层的任务就是为应用进程之间的通信提供服务</p><h3 id="一用户数据报协议">一、用户数据报协议</h3><p>UDP报文首部的长度仅八个字节 ### 二、传输控制协议TCP</p><p>可靠传输的工作原理 理想传输条件有以下两个特点 &gt;(1)传输信道不会产生差错 (2)不管发送方以多快的速度发送数据，接收方总是来得及处理收到的数据</p><p>理想状态下，不需要任何措施就能够实现可靠传输，。但实际网络中，都不具备理想传输条件，必须使用一些可靠传输协议、从原本不可靠的传输信道实现可靠传输对于第二点，接收方通过确认报文的窗口值来确认控制发送方的发送窗口值(我能接受多少，你就发多少)</p><p>停止等待协议&gt;每发送完一个分组即停止发送，等待对方的确认，在收到确认后再发送下一个分组</p><p>每发送完一个分组，必须暂时保存已发送的分组的副本，只有在收到相应的确认后才消除暂时保留的分组副本，就如发送缓存和接受缓存</p><p>设置一个超时重传时间，在发送一个分组，启动超时重传时间，等待ACK，若丢失或者错误，那么则不会受到确认，这时时间到期就重传</p><p>超时计时器的重传时间比分组传输的平均往返时间要长一些，防止不必要的重传</p><p>使用上述的确认和重传机制，我们就可以在不可靠的传输网络实现可靠的通信，这种机制通常交作文自动重传请求，重传的请求是发送方自动进行的不需要接收方的通知</p><p>滑动窗口 连续ARQ协议 &gt;ARQ的优点是简单，但缺点是信道利用率太低</p><p>采用流水线方式，不用等待确认，发送方连续发送多个分组</p><p>发送窗口：位于发送窗口内的分组可以连续发送出去，不需要等待对方确认</p><figure><img src="/2023/12/24/%E8%BF%90%E8%BE%93%E5%B1%82/image-7.png" alt="Alt text"><figcaption aria-hidden="true">Alt text</figcaption></figure><h3 id="三tcp可靠传输的实现">三、TCP可靠传输的实现</h3><h3 id="四tcp的流量控制">四、TCP的流量控制</h3><p>流量控制，就是对发送方的发送速率不要太快，要让接收方来得及接收滑动窗口机制很方便的在TCP连接上实现对发送方的流量控制</p><p>基本方法：根据接收方根据自己的接受能力控制发送方的流量控制</p><h3 id="五tcp的拥塞控制">五、TCP的拥塞控制</h3><h3 id="六tcp的运输连接管理">六、TCP的运输连接管理</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;运输层和网络层的联系和区别
+&amp;gt;物理层、数据链路层以及网络层它们共同解决了将主机通过异构网络互联起来所面临的问题，实现了主机到主机的通信，但实际上，在计算机网络中进行通信的真正主体是位于通信两端主机中的进程，即两台主机的应用进程互相通信。因此运输层的任务就是为应用进程</summary>
+      
+    
+    
+    
+    <category term="计算机网络" scheme="https://czylm.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="知识总结" scheme="https://czylm.github.io/tags/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>应用层</title>
+    <link href="https://czylm.github.io/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    <id>https://czylm.github.io/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/</id>
+    <published>2023-12-20T13:03:48.000Z</published>
+    <updated>2023-12-23T16:19:03.011Z</updated>
+    
+    <content type="html"><![CDATA[<p>应用层：负责最直观的应用请求的封装、发起</p><h3 id="一域名系统dns">一、域名系统DNS</h3><p>连接在互联网上的主机不仅有IP地址，还有便于用户记忆的主机名字。域名系统DNS能够把互联网上的主机的名字转换为IP地址</p><p>互联网采用层次树状结构的命名方式，任何一个连接在互联网上的主机，都有一个唯一的层次结构的名字，即域名。域名中的每一个层次叫做域，最高层次可以划分子域，每一个子域还可以继续划分子域，这样就形成了顶级域、二级域、三级域等级别最低的域名写在最左边，级别最高的写在最右边，完整域名不超过255个字符，单个标号不超过63个字符标号由英文字母和数字组成，字符只能使用-</p><p>全球顶级域名 &gt;按功能：国际通用顶级域名gTLD，国家顶级域名nTLD</p><p>文件传输、访问和管理 FTP 电子邮件 SMTP POP3 虚拟终端 HTTP查询服务和远程作业登录 DNS</p><p>互联网的域名空间结构 <img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image.png" alt="Alt text"></p><p>从域名到IP地址的解析又多个域名服务器共同完成</p><p>域名系统不是以域为管理单位，而是以区为管理单位。区可能小于或等于域吗，但一定不能大于域，每一个区设置相应的权限域名服务器，保存区中所有主机的域名到IP的映射</p><ol type="1"><li>根域名服务器：不管哪一个本地域名服务器，只要自己无法解析，首先求助于根域名服务器</li><li>顶级域名服务器：当收到DNS查询请求时，一般情况下会给出下一步应当找的权限域名服务器的IP地址</li><li>权限域名服务器：负责最终的域名到IP地址的解析</li><li>本地域名服务器：本地域名服务器也叫默认域名服务器，当一个主机发送DNS查询请求时，该查询请求报文就首先发给本地域名服务器，并且本地域名服务器会缓存其最近查询过的域名的解析，当所要查询的主机位于本地域名服务器的缓存中时，本地域名服务器就能立即将所查询的主机域名转化为它的IP地址，而不需要再去查询其他的域名服务器</li></ol><p>为什么DNS支持UDP和TCP大多数情况下DNS使用UDP进行传输，因为一般的返回的内容不会超过UDP报文的最大长度512字节，用UDP传输时，不需要经过TCP的三次握手的过程，从而提高了响应速度。因此这时也要求域名解析器和域名服务器都必须自己处理超时和重传从而保证可靠性。但如果返回的响应超过512字节或者区域传送，会使用TCP进行传输</p><p>区域传送：主域名服务器向辅助域名服务器传送变化的那部分数据，一般很大。</p><p><strong>DNS的通信方式有UDP和TCP两种，端口都为53，一般情况下是UDP进行DNS域名查询，一般来说，UDP支持的最大数据受限于以太网帧的MTU1500字节，计算下来应该是1500- 20 - 8 =1472，但是怎么就变成了512了。是因为在非局域网环境，如：在internet下的时候，MTU是各个路由器进行一个配置的。所以通常路由器默认的MTU为576字节，所以为了适应网络环境，DNS协议在返回的数据大于512的时候，就转化为TCP协议</strong></p><h3 id="二文件传送协议ftp">二、文件传送协议FTP</h3><blockquote><p>使用TCP可靠的运输服务，最广泛的文件传送协议，使用客户-服务器方式，并且一个FTP服务器进程可同时为多个客户进程提供服务</p></blockquote><p>FTP的服务器进程由两部分组成：一个主进程，另外有若干个从属进程。</p><p>主进程打开端口，让外部发送的数据可以进来，并且将这些数据逐个分配给各从属进程。从属进程则是单独为这些数据服务主进程工作步骤： 1.打开熟悉窗口（端口号21），等待客户进程发出连接请求2.启动从属进程处理客户进程发送来的请求，处理完毕后即终止从属进程。3.回到等待状态，继续接受其他客户进程发来的请求，主进程和从属进程的处理是并发进行的</p><p>根据数据连接是否是服务端主动建立，FTP有主动和被动两种主动：服务器主动建立数据连接，服务器端口号位20，客户端的端口号随机，但必须大于1024，一位0-1023是熟知端口号被动：客户端主动建立数据连接，其中客户端的端口号由客户端自己决定，服务器端的端口号随机</p><h3 id="三万维网www">三、万维网WWW</h3><blockquote><p>一个大规模的、联机式的信息储藏所</p></blockquote><p>能够非常方便的从互联网上的一个站点访问另外一个站点，从而主动的按需获取丰富的信息</p><p>万维网是一个分布式的超媒体系统，是超文本系统的扩充，而文本指的是包含指向其他文档的链接的文本</p><p>万维网的工作方式：&gt;客户-服务器方式工作，在万维网文档所驻留的主机上运行服务器程序，这个主机，这个主机也成为万维网服务器；在客户机上运行客户程序，万维网客户程序</p><p>万维网需要解决的问题怎样标志分布在整个互联网的万维网文档上的万维网文档&gt;使用统一资源定位符URL使每一个文档在整个互联网的范围内具有唯一的标识符URL</p><p>URL表示互联网上的资源的位置和访问这些资源的方法。URL实际上就是就是互联网资源的地址</p><p>URL的一般形式 <协议>://<主机>:<端口>/<路径></路径></端口></主机></协议></p><p>协议：ftp http https主机：万维网文档所存放主机的域名，也可以使用IP地址，通常以WWW开头端口：协议使用的端口号，使用默认的可以省略路径：万维网文档所存放的目录</p><p>使用什么协议来实现万维网上的各种链接 &gt;使用超文本传送协议HTTPHTTP是一个应用层协议，使用TCP连接进行可靠的传送HTTP定义了浏览器和万维网服务器通信的格式和规则</p><p>TCP建立连接的三报文握手的第三个报文段可以携带数据，因此第三个报文段就是客户对万维网文档的请求报文。<strong>请求一个万维网文档所需的时间是该文档的传输时间(与文档大小成正比)加上两倍往返时间RTT(一个RTT用于建立TCP连接，另一个RTT用于请求和接受万维网文档)</strong></p><p><img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-1.png"></p><p>非持续连接： &gt;HTTP/1.0每请求一个文档都要有两倍RTT的开销，若一个页面与很多连接的对象需要依次进行链接，那么每一次链接下载都导致两倍的RTT的开销在万维网服务器往往需要同时服务于大量客户的请求，这种非持续连接会使万维网服务器的负担很重</p><p>持续连接： &gt;HTTP/1.1使用持续连接；万维网服务器在发送响应后仍然在一段时间内保持这条TCP连接，使同一个客户和该服务器可以持续在这条连接上传送后续的HTTP请求报文和响应报文，只要这些文档都在同一个服务器上就行</p><p>持续连接有两种工作方式 (1)非流水线方式&gt;客户在收到前一个响应后才能发出下一个请求。在TCP连接建立后，客户每次访问对象都要去一个往返时间RTT，这比非持续连接要用两倍的RTT的开销，节省了建立TCP所需的一个RTT时间</p><p>(2)流水线方式&gt;在收到HTTP响应报文之前能够接着发送新的请求报文，连续的多个请求报文到达服务器后，服务器就可持续发回响应报文流水线工作方式使TCP连接中的空闲时间减少，提高了文档的下载效率</p><p>并发TCP连接&gt;无论是持续连接还是非持续连接，浏览器都可以打开多个并行的TCP链接以提高访问速度</p><p>HTTP/2.0&gt;允许客户复用TCP连接进行多个请求，这样就节省了大量的TCP链接多次建立和释放连接所花费的时间</p><p>代理服务器&gt;网络硬件设备，万维网高速缓存，一般工作在中间系统上，以代理服务器方式构成的内容分发网络CDN在互联网应用中起到了很大的作用</p><p>简单来说，代理服务器就是把最近的一些请求和响应暂存在本地磁盘，当与暂时存放的请求相同的新请求到达时，代理服务器即返回暂存的响应，而不需要按URL去互联网访问该资源</p><p>没有代理服务器的情况下，当链路过载时，时延很大</p><p>使用代理服务器的情况 工作模式：1.浏览器访问互联网的服务器时，先与校园网的代理服务器建立TCP连接，并向代理服务器发出HTTP请求报文。2.若代理服务器已经存放了所请求的对象，则将此对象放入HTTP响应报文中返回给浏览器3.若为存放，代理服务器就代表浏览器与互联网上的原点服务器建立TCP连接，并发送HTTP请求报文4.源点服务器将所请求的对象放在HTTP 响应报文中返回给校园网的代理服务器5.代理服务器收到对象后，先保存到本地缓存器，然后将该对象放在HTTP响应报文中，通过已经建立的TCP链接，返回个请求该对象但是浏览器</p><p>HTTP报文结构 &gt;请求报文和响应报文</p><p>组成 &gt;开始行 区分请求还是响应报文 首部行说明浏览器、服务器或报文主题的一些信息 实体主体请求报文一般不用；响应报文一般是万维网文档，但也可不用</p><figure><img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-2.png" alt="Alt text"><figcaption aria-hidden="true">Alt text</figcaption></figure><p>方法：对所请求的对象进行的操作，实际上是一些命令 <img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-3.png" alt="Alt text"></p><figure><img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-4.png" alt="Alt text"><figcaption aria-hidden="true">Alt text</figcaption></figure><p><img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-5.png"></p><p>万维网站点使用Cookie来识别、跟踪用户</p><p>用户通过浏览器访问某一个网站，该网站的服务器会为其生成一个唯一的识别码，并且作为索引写入数据库当中，服务器会在响应报文的Set-cookie的首部行，写出赋予该用户的识别码。浏览器收到后会把服务器的主机名和识别码作为一项写入Cookie文件中，用户继续访问该网站的时候，每发送一个HTTP请求报文的时候，浏览器会从Cookie文件中取出该网站对于的识别码，放到HTTP请求报文的Cookie首部行中，利用次识别码，这个网站就能够跟踪该用户在该网站的活动(某音、宝等类似)。</p><p>使用超文本标记语言HTML可以使不同的作者创作不同的风格的万维网文档都能在互联网上的各种主机上显示出来，同时使用户清楚的知道在什么地方存在着连接</p><h3 id="四电子邮件">四、电子邮件</h3><blockquote><p>电子邮件系统由三个主要构建组成：用户代理、邮件服务器以及邮件发送协议和邮件读取协议</p></blockquote><p>用户代理：用户与电子邮件系统的接口，电子邮件客户端软件邮件服务器：用来发送和接受邮件，同时还要向发送人报告邮件传送的结果用户代理向邮件服务器发送邮件或邮件服务器之间发送邮件，使用简单邮件传送协议SMTP用户代理从邮件服务器读取邮件时，使用邮局协议第三版 POP3</p><p>SMTP 和 POP3都使用TCP连接来可靠的传送邮件，并且都使用客户-服务器的工作方式</p><p>基于万维网的电子邮件电子邮件从浏览器发送到邮件服务器使用HTTP协议的POST方法两个邮件服务器之间的传仍然使用SMTP协议邮件从邮件服务器传送到浏览器使用HTTP协议的GET方法 <img src="/2023/12/20/%E5%BA%94%E7%94%A8%E5%B1%82/image-6.png" alt="Alt text"></p><p>通用互联网邮件扩充 MIMESMTP不能传送可执行文件或其他二进制文件，只能传送7位的ASCII文本文件，所以需要MIME对邮件内容进行内容的格式转换</p><h3 id="五动态主机配置协议dhcp">五、动态主机配置协议DHCP</h3><p>连接到互联网的计算机的协议软件需要配置以下项目： IP地址 子网掩码默认路由器IP地址(默认网关) 域名服务器的IP地址</p><p>不可能一直都是人工手动配置，因此动态主机配置协议DHCP(即插即用的连网方式)，允许主机自动获取以上配置信息而不需要手工干预</p><p>使用客户-服务器方式</p><p>(1)需要IP地址的主机在启动时广播发送报文，将目的IP地址设为255:255:255:255，这时该主机就成为DHCP客户，发送广播报文是因为不知道DHCP服务器在什么地方，因此要发现DHCP服务器的IP地址，这台主机目前还没有自己的IP地址，因此它将IP数据报的源IP地址设为0(2)本地网络上的所有主机都能够收到这广播报文，但只有DHCP服务器才回答此广播报文。DHCP服务器先在其数据库中查找该计算机的配置信息，若找到，则返回找到的信息，若找不到，则从服务器的IP地址池中取一个地址分配给计算机。DHCP服务器使用提供报文将配置信息返回给请求方</p><p>DHCP中继代理&gt;广播发送的发现报文无法跨网络传输，而在每一个网络中设置一个DHCP服务器又会使DHCP服务器的数量太多，因此需要在每一个网络中至少部署一个DHCP中继代理，而路由器太多具有中继代理功能，它配置了DHCP服务器的IP地址信息然后，当DHCP中继代理收到主机以广播形式发送的发现报文后，就以单播的形式向DHCP服务器转发此报文，并等待回答，收到DHCP服务器回答的提供报文后，DHCP中继代理再把此提供报文发回给主机</p><p>租用期&gt;DHCP服务器分配给DHCP客户的IP地址是临时的，因此DHCP客户只能在一段时间内使用，其值可在DHCP服务器中设定</p><p>DHCP服务器在给DHCP客户发送的提供报文的选项中给出租用期的数值，过半1，DHCP客户需要发送请求报文更新租用期</p><p>1.DHCP服务器被动打开UDP端口67，等待客户端发来的报文2.DHCP客户从UDP端口68发送报文3.凡收到DHCP发现报文的DHCP服务器都发出DHCP提供报文，因此DHCP客户可能收到多个DHCP提供报文4.DHCP客户从几个DHCP服务器中选择一个，并向其发送DHCP请求报文5.被选择的DHCP服务器发送确认报文，DHCP客户收到确认报文后就可以使用这个IP地址了6.DHCP客户现在要根据服务器提供的租用期T设置两个计时器T1和T2，他们的超时时间分别是0.5T和0.875T7.租用期过半(T1时间到),DHCP客户发送请求报文，要求更新租用期8.若DHCP服务器同意，则发回确认报文，DHCP客户得到了新的租用期，需要重新设置计时器9.若DHCP服务器不同意，则发回否认报文，这是DHCP客户必须立即停止使用原来的IP地址，而必须重新申请IP地址(回到步骤2)</p><p>DHCP客户可随时终止服务器所提供的租用期，这时只需要向DHCP服务器发送释放报文即可</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;应用层：负责最直观的应用请求的封装、发起&lt;/p&gt;
+&lt;h3 id=&quot;一域名系统dns&quot;&gt;一、域名系统DNS&lt;/h3&gt;
+&lt;p&gt;连接在互联网上的主机不仅有IP地址，还有便于用户记忆的主机名字。域名系统DNS能够把互联网上的主机的名字转换为IP地址&lt;/p&gt;
+&lt;p&gt;互联网采用层</summary>
+      
+    
+    
+    
+    <category term="计算机网络" scheme="https://czylm.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="知识总结" scheme="https://czylm.github.io/tags/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>计算机网络概述</title>
@@ -42,7 +94,7 @@
     <link href="https://czylm.github.io/2023/12/19/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"/>
     <id>https://czylm.github.io/2023/12/19/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</id>
     <published>2023-12-19T08:03:35.000Z</published>
-    <updated>2023-12-19T13:40:41.748Z</updated>
+    <updated>2023-12-26T04:25:14.704Z</updated>
     
     <content type="html"><![CDATA[<p>检查是否发生拥塞：记录超时重传的包的数目 拥塞窗口cwnd：控制发送报文速率的一个状态变量 接收方能不能及时接收一定的数量报文</p><p>大小随着网络的拥塞程度动态变化 没有拥塞，增大拥塞窗口，发送更多的报文出现拥塞，减小窗口 假定足够大，发送窗口等于拥塞窗口的数值</p><p>流量窗口：接收端根据接受能力调整，字节为单位发送窗口：发送方根据拥塞状态调整 报文段MSS单位与发送和接受双方没用关系，取决于这个路上的网络的拥塞状态</p><p>cwnd很小初始，为1，慢开始算法 若没有拥塞，增大拥塞窗口，提高发送效率cwnd较小，指数增长，较大，线性增长，拥塞避免算法</p><p>若出现拥塞，减小拥塞窗口，消除拥塞 调整门限 乘法减小</p><p>传输轮次：一个轮次传输一个拥塞窗口的数据</p><p>提高效率；快重传和快恢复 快重传：连续三个重复确认发送给发送方</p><p>窗口 256 39 （38 36）</p><p>报文长度不一定相同</p><p>254 22、（23、24） 207 48 47 45 46 208 63 205 37 26 31 33 204 20 2119 路由器路由表怎么写 112 7 8 33 30 求时延 RRT</p><p>没有选择没有填空，全是大题 第一章 网络性能指标概述 两个题 20 第三章20分 计算题 简单题 应用题 第四章 六道题 60分</p>]]></content>
     
@@ -491,62 +543,6 @@
     
     
     <category term="位运算" scheme="https://czylm.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>递归实现排列型枚举</title>
-    <link href="https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/"/>
-    <id>https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/</id>
-    <published>2023-12-10T12:10:16.000Z</published>
-    <updated>2023-12-10T19:50:46.104Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/C"> ---&gt;传送门</a></p><h3 id="题目大意">题目大意</h3><blockquote><p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span>个整数排成一列后随机打乱顺序，输出所有可能的次序。</p></blockquote><h3 id="思路">思路</h3><blockquote><p>全排列，将一个大问题转换为小问题，即先考虑十个数的顺序，然后是久个不确定的数的顺序，再到八个乃至一个</p></blockquote><h3 id="时间复杂度">时间复杂度</h3><blockquote><p>!n 至 !n * n</p></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vis</span><span class="params">(<span class="number">21</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">            vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">calc</span>(x + <span class="number">1</span>);</span><br><span class="line">            vis[i] = <span class="number">0</span>;</span><br><span class="line">            vec.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/998/C&quot;&gt; ---&amp;gt;
-传送门&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;题目大意&quot;&gt;题目大意&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;从 1 ~ &lt;span class=&quot;m</summary>
-      
-    
-    
-    
-    <category term="算法进阶指南" scheme="https://czylm.github.io/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/"/>
-    
-    
-    <category term="递归" scheme="https://czylm.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>递归实现组合型枚举</title>
-    <link href="https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E5%9E%8B%E6%9E%9A%E4%B8%BE/"/>
-    <id>https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E5%9E%8B%E6%9E%9A%E4%B8%BE/</id>
-    <published>2023-12-10T11:52:32.000Z</published>
-    <updated>2023-12-10T19:50:42.211Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://ac.nowcoder.com/acm/contest/998/B"> ---&gt;传送门</a></p><h3 id="题目大意">题目大意</h3><blockquote><p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span> 个整数随机选取 <span class="math inline">\(m\)</span> 个，输出所有可能的选择方案</p></blockquote><h3 id="思路">思路</h3><blockquote><p>在指数型基础上改一下即可。这里用到了剪枝，在图论当中的运用非常普遍。如果能够及时的发现当前问题是无解的，就不需要到达问题边界才返回结果。如果已经选择了超过<span class="math inline">\(m\)</span>个数，或者即使再选上剩余所有的数也不够 <span class="math inline">\(m\)</span>个，就可以提前得知当前的问题无解。这样我们一旦进入无解的分支就会立刻返回，时间复杂度也就从<span class="math inline">\(2^n\)</span>降低到了 <span class="math inline">\(C_n^m\)</span>。</p></blockquote><h3 id="时间复杂度">时间复杂度</h3><blockquote><p><span class="math inline">\(C_n^m\)</span> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(vec.<span class="built_in">size</span>() &gt; m || vec.<span class="built_in">size</span>() + (n - x + <span class="number">1</span>) &lt; m)&#123;<span class="comment">//剪枝</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vec.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//选</span></span><br><span class="line">    vec.<span class="built_in">pop_back</span>();<span class="comment">//还原现场</span></span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//不选</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/998/B&quot;&gt; ---&amp;gt;
-传送门&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;题目大意&quot;&gt;题目大意&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;从 1 ~ &lt;span class=&quot;m</summary>
-      
-    
-    
-    
-    <category term="算法进阶指南" scheme="https://czylm.github.io/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/"/>
-    
-    
-    <category term="递归" scheme="https://czylm.github.io/tags/%E9%80%92%E5%BD%92/"/>
     
   </entry>
   

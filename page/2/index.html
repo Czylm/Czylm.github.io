@@ -198,6 +198,218 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://czylm.github.io/2023/12/17/%E6%9C%80%E4%BD%B3%E7%89%9B%E5%9B%B4%E6%A0%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.gif">
+      <meta itemprop="name" content="Czylm">
+      <meta itemprop="description" content="为了爱你，我要跟时间决斗，把你接上比青春更永久的枝头">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎回家~">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/17/%E6%9C%80%E4%BD%B3%E7%89%9B%E5%9B%B4%E6%A0%8F/" class="post-title-link" itemprop="url">最佳牛围栏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-17 21:26:57 / 修改时间：21:46:38" itemprop="dateCreated datePublished" datetime="2023-12-17T21:26:57+08:00">2023-12-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">算法进阶指南</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/104/"> ---&gt;
+传送门 </a></p>
+<h3 id="题目大意">题目大意</h3>
+<blockquote>
+<p>给定正整数序列 <span class="math inline">\(A\)</span>，求一个平均数最大的、长度不小于 <span class="math inline">\(L\)</span> (连续的) 字段。</p>
+</blockquote>
+<h3 id="解题思路">解题思路</h3>
+<blockquote>
+<p>二分答案。判定“是否存在一个长度不小于 <span class="math inline">\(L\)</span> 的字段，平均数不小于二分的值”
+如果数列的每个数都减去二分的值，就转化为判定“是否存在一个长度不小于
+<span class="math inline">\(L\)</span> 的字段，字段和非负”。
+接下来解决两个问题： 1.求一个字段，他的和最大(无长度限制)
+扫描该数列，字段和变成负数 ，则清空。
+2.求一个字段，他的和最大(长度不小于 <span class="math inline">\(L\)</span>)
+每一次只会有一个新的取值需要进行比较，因此只需要用一个变量记录一下当前的最小值，每次新的取值与最小值比较。</p>
+</blockquote>
+<blockquote>
+<p><strong>单调性</strong>：答案随着某个变量增大而增大或者增大而减小。</p>
+</blockquote>
+<h3 id="时间复杂度">时间复杂度</h3>
+<blockquote>
+<p><span class="math inline">\(nlogn\)</span></p>
+<h3 id="实现代码">实现代码</h3>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> a[N],b[N],sum[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> N,L;</span><br><span class="line">	cin &gt;&gt; N &gt;&gt; L;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= N; i ++)&#123;</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">double</span> l = <span class="number">-1e6</span>,r = <span class="number">1e6</span>;</span><br><span class="line">	<span class="type">double</span> eps = <span class="number">1e-5</span>;</span><br><span class="line">	<span class="keyword">while</span>(r - eps &gt; l)&#123;</span><br><span class="line">		<span class="type">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i ++)&#123;</span><br><span class="line">			b[i] = a[i] - mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i ++)&#123;</span><br><span class="line">			sum[i] = (sum[i - <span class="number">1</span>] + b[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="type">double</span> ans = <span class="number">-1e10</span>;</span><br><span class="line">		<span class="type">double</span> min_val = <span class="number">1e10</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = L; i &lt;= N; i ++)&#123;</span><br><span class="line">			min_val = <span class="built_in">min</span>(min_val,sum[i-L]);<span class="comment">//</span></span><br><span class="line">			ans = <span class="built_in">max</span>(ans,sum[i] - min_val);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; ans &lt;&lt; endl;</span></span><br><span class="line">		<span class="keyword">if</span>(ans &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">			l = mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> r = mid;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">int</span>(r * <span class="number">1000</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://czylm.github.io/2023/12/14/%E6%9C%80%E9%AB%98%E7%9A%84%E7%89%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.gif">
+      <meta itemprop="name" content="Czylm">
+      <meta itemprop="description" content="为了爱你，我要跟时间决斗，把你接上比青春更永久的枝头">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎回家~">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/14/%E6%9C%80%E9%AB%98%E7%9A%84%E7%89%9B/" class="post-title-link" itemprop="url">最高的牛</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-14 21:29:19" itemprop="dateCreated datePublished" datetime="2023-12-14T21:29:19+08:00">2023-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-15 01:57:08" itemprop="dateModified" datetime="2023-12-15T01:57:08+08:00">2023-12-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">算法进阶指南</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>912</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/103/">
+---&gt;传送门 </a></p>
+<h3 id="题目大意">题目大意</h3>
+<p><img src="\最高的牛/image.png"></p>
+<h3 id="思路">思路</h3>
+<blockquote>
+<p>题目中的 <span class="math inline">\(M\)</span>
+对关系给我们的信息实际上是牛之间身高的相对大小的关系，我们初始化一个数组
+<span class="math inline">\(a\)</span>，全部为 <span class="math inline">\(0\)</span>，有一对关系内，我们就可以得知在 <span class="math inline">\((l,r)\)</span>
+内的牛要比端点矮，通过差分来映射出这个关系，我这个范围内的牛要比端点的至少低
+<span class="math inline">\(1\)</span>，最后每个牛的身高就是最高值与相对大小之和，即
+<span class="math inline">\(h + a[i]\)</span>。</p>
+</blockquote>
+<h3 id="时间复杂度">时间复杂度</h3>
+<blockquote>
+<p>将区间操作转化了左右端点上的操作，时间复杂度为 O(N + M)。</p>
+</blockquote>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> se second</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> sz size()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> bpt __builtin_popcountll</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n,p,h,m;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; p &gt;&gt; h &gt;&gt; m;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;<span class="built_in">a</span>(n + <span class="number">2</span>);</span><br><span class="line">	map&lt;PII,<span class="type">int</span>&gt; mp;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">	    <span class="type">int</span> l,r;</span><br><span class="line">	    cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">	    <span class="keyword">if</span>(l &gt; r) <span class="built_in">swap</span>(l,r);</span><br><span class="line">	    <span class="keyword">if</span>(mp[&#123;l,r&#125;]) <span class="keyword">continue</span>;</span><br><span class="line">	    mp[&#123;l,r&#125;] = <span class="number">1</span>;</span><br><span class="line">	    a[l + <span class="number">1</span>] --,a[r] ++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">	    a[i] += a[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">	    cout &lt;&lt; h + a[i] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://czylm.github.io/2023/12/14/IncDec%E5%BA%8F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -965,214 +1177,6 @@ c\)</span>;</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.gif">
-      <meta itemprop="name" content="Czylm">
-      <meta itemprop="description" content="为了爱你，我要跟时间决斗，把你接上比青春更永久的枝头">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎回家~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%88%97%E5%9E%8B%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">递归实现排列型枚举</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-10 20:10:16" itemprop="dateCreated datePublished" datetime="2023-12-10T20:10:16+08:00">2023-12-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-11 03:50:46" itemprop="dateModified" datetime="2023-12-11T03:50:46+08:00">2023-12-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">算法进阶指南</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>634</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/998/C"> ---&gt;
-传送门</a></p>
-<h3 id="题目大意">题目大意</h3>
-<blockquote>
-<p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span>
-个整数排成一列后随机打乱顺序，输出所有可能的次序。</p>
-</blockquote>
-<h3 id="思路">思路</h3>
-<blockquote>
-<p>全排列，将一个大问题转换为小问题，即先考虑十个数的顺序，然后是久个不确定的数的顺序，再到八个乃至一个</p>
-</blockquote>
-<h3 id="时间复杂度">时间复杂度</h3>
-<blockquote>
-<p>!n 至 !n * n</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> m,n;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vis</span><span class="params">(<span class="number">21</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">            vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">calc</span>(x + <span class="number">1</span>);</span><br><span class="line">            vis[i] = <span class="number">0</span>;</span><br><span class="line">            vec.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://czylm.github.io/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E5%9E%8B%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.gif">
-      <meta itemprop="name" content="Czylm">
-      <meta itemprop="description" content="为了爱你，我要跟时间决斗，把你接上比青春更永久的枝头">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎回家~">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/10/%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E5%9E%8B%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">递归实现组合型枚举</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-10 19:52:32" itemprop="dateCreated datePublished" datetime="2023-12-10T19:52:32+08:00">2023-12-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-11 03:50:42" itemprop="dateModified" datetime="2023-12-11T03:50:42+08:00">2023-12-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">算法进阶指南</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>742</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/998/B"> ---&gt;
-传送门</a></p>
-<h3 id="题目大意">题目大意</h3>
-<blockquote>
-<p>从 1 ~ <span class="math inline">\(n\)</span> 这 <span class="math inline">\(n\)</span> 个整数随机选取 <span class="math inline">\(m\)</span> 个，输出所有可能的选择方案</p>
-</blockquote>
-<h3 id="思路">思路</h3>
-<blockquote>
-<p>在指数型基础上改一下即可。这里用到了剪枝，在图论当中的运用非常普遍。如果能够及时的发现当前问题是无解的，就不需要到达问题边界才返回结果。如果已经选择了超过
-<span class="math inline">\(m\)</span>
-个数，或者即使再选上剩余所有的数也不够 <span class="math inline">\(m\)</span>
-个，就可以提前得知当前的问题无解。这样我们一旦进入无解的分支就会立刻返回，时间复杂度也就从
-<span class="math inline">\(2^n\)</span>降低到了 <span class="math inline">\(C_n^m\)</span>。</p>
-</blockquote>
-<h3 id="时间复杂度">时间复杂度</h3>
-<blockquote>
-<p><span class="math inline">\(C_n^m\)</span> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">pair&lt;string,<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(vec.<span class="built_in">size</span>() &gt; m || vec.<span class="built_in">size</span>() + (n - x + <span class="number">1</span>) &lt; m)&#123;<span class="comment">//剪枝</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x == n + <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v : vec) cout &lt;&lt; v &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vec.<span class="built_in">push_back</span>(x);</span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//选</span></span><br><span class="line">    vec.<span class="built_in">pop_back</span>();<span class="comment">//还原现场</span></span><br><span class="line">    <span class="built_in">calc</span>(x + <span class="number">1</span>);<span class="comment">//不选</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1244,7 +1248,7 @@ c\)</span>;</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
