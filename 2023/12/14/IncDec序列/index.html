@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"czylm.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="---&gt;传送门 题目大意  解题思路  区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为 \(0\)，因此我们使用差分。先求出差分数组 \(b\),分别统计正数和负数的大小。我们有四种操作： 1. \(b_i\) 和 \(b_j\)，会改变 \((i,j)\) 内的大小 2. \(b_1\) 和 \(b_j\)，会改变 \((1,j)\) 内的">
+  <meta name="description" content="—-&gt;传送门 题目大意 解题思路 区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为 $0$，因此我们使用差分。先求出差分数组 $b$,分别统计正数和负数的大小。我们有四种操作：  $b_i$ 和 $b_j$，会改变 $(i,j)$ 内的大小 $b_1$ 和 $b_j$，会改变 $(1,j)$ 内的大小 $b_j$ 和 $b_{n + 1}$，会改变 $(j,n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IncDec序列">
 <meta property="og:url" content="https://czylm.github.io/2023/12/14/IncDec%E5%BA%8F%E5%88%97/index.html">
 <meta property="og:site_name" content="欢迎回家~">
-<meta property="og:description" content="---&gt;传送门 题目大意  解题思路  区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为 \(0\)，因此我们使用差分。先求出差分数组 \(b\),分别统计正数和负数的大小。我们有四种操作： 1. \(b_i\) 和 \(b_j\)，会改变 \((i,j)\) 内的大小 2. \(b_1\) 和 \(b_j\)，会改变 \((1,j)\) 内的">
+<meta property="og:description" content="—-&gt;传送门 题目大意 解题思路 区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为 $0$，因此我们使用差分。先求出差分数组 $b$,分别统计正数和负数的大小。我们有四种操作：  $b_i$ 和 $b_j$，会改变 $(i,j)$ 内的大小 $b_1$ 和 $b_j$，会改变 $(1,j)$ 内的大小 $b_j$ 和 $b_{n + 1}$，会改变 $(j,n">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://czylm.github.io/2023/12/14/IncDec%E5%BA%8F%E5%88%97/image.png">
 <meta property="article:published_time" content="2023-12-14T13:10:36.000Z">
@@ -259,7 +259,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>979</span>
+              <span>934</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -278,29 +278,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/102/">
----&gt;传送门</a></p>
-<h3 id="题目大意">题目大意</h3>
-<p><img src="/2023/12/14/IncDec%E5%BA%8F%E5%88%97/image.png"></p>
-<h3 id="解题思路">解题思路</h3>
-<blockquote>
-<p>区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为
-<span class="math inline">\(0\)</span>，因此我们使用差分。先求出差分数组
-<span class="math inline">\(b\)</span>,分别统计正数和负数的大小。我们有四种操作：
-1. <span class="math inline">\(b_i\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((i,j)\)</span> 内的大小 2. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_j\)</span>，会改变 <span class="math inline">\((1,j)\)</span> 内的大小 3. <span class="math inline">\(b_j\)</span> 和 <span class="math inline">\(b_{n +
-1}\)</span>，会改变 <span class="math inline">\((j,n + 1)\)</span>
-内的大小 4. <span class="math inline">\(b_1\)</span> 和 <span class="math inline">\(b_{n + 1}\)</span> ，会改变整个数列的大小
-可以肯定的是，第四种是无用功，操作是不会改变相对大小，为了让相对大小尽可能的改变，我们最优先才去第一种操作，在一定
-<strong>区间内</strong>
-的大小相同的时候，就考虑左端点和右边界的差值以及右端点和左边界的差值，进行
-<span class="math inline">\(2、3\)</span> 操作。
-统计可以得出，最小的操作次数为 <span class="math inline">\(min(z,f) +
-\vert z - f\vert\)</span>，其中 <span class="math inline">\(f\)</span>
-为负数的绝对值。 能产生 <span class="math inline">\(\vert z -
-f\vert\)</span> + 1 中不同的 <span class="math inline">\(b_1\)</span>结果，即方案数。</p>
+        <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/102/"> —-&gt;传送门</a></p>
+<h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p><img src="/2023/12/14/IncDec%E5%BA%8F%E5%88%97/image.png" alt></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><blockquote>
+<p>区间操作，可以考虑差分。观察发现，最终变成相同的数，相当于相邻的两个数之差为 $0$，因此我们使用差分。先求出差分数组 $b$,分别统计正数和负数的大小。我们有四种操作：</p>
+<ol>
+<li>$b_i$ 和 $b_j$，会改变 $(i,j)$ 内的大小</li>
+<li>$b_1$ 和 $b_j$，会改变 $(1,j)$ 内的大小</li>
+<li>$b_j$ 和 $b_{n + 1}$，会改变 $(j,n + 1)$ 内的大小</li>
+<li>$b_1$ 和 $b_{n + 1}$ ，会改变整个数列的大小<br>可以肯定的是，第四种是无用功，操作是不会改变相对大小，为了让相对大小尽可能的改变，我们最优先才去第一种操作，在一定 <strong>区间内</strong> 的大小相同的时候，就考虑左端点和右边界的差值以及右端点和左边界的差值，进行 $2、3$ 操作。<br>统计可以得出，最小的操作次数为 $min(z,f) + \vert z - f\vert$，其中 $f$ 为负数的绝对值。<br>能产生 $\vert z - f\vert$ + 1 中不同的 $b_1$结果，即方案数。</li>
+</ol>
 </blockquote>
-<h3 id="代码实现">代码实现</h3>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">	<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span>,<span class="title">b</span><span class="params">(n + <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">	    cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>;  i--)&#123;</span><br><span class="line">	    b[i] = a[i] - a[i <span class="number">-1</span> ];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ll z = <span class="number">0</span>, f = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">	    <span class="keyword">if</span>(b[i] &gt; <span class="number">0</span>) z += b[i];</span><br><span class="line">	    <span class="keyword">else</span> f += b[i];;</span><br><span class="line">	&#125;</span><br><span class="line">	f = -f;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">max</span>(z,f) &lt;&lt; endl &lt;&lt; <span class="built_in">abs</span>(z - f) + <span class="number">1</span> &lt;&lt; endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6E5</span> + <span class="number">10</span>, mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">	<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span>,<span class="title">b</span><span class="params">(n + <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i ++)&#123;</span><br><span class="line">	    cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>;  i--)&#123;</span><br><span class="line">	    b[i] = a[i] - a[i <span class="number">-1</span> ];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ll z = <span class="number">0</span>, f = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">	    <span class="keyword">if</span>(b[i] &gt; <span class="number">0</span>) z += b[i];</span><br><span class="line">	    <span class="keyword">else</span> f += b[i];;</span><br><span class="line">	&#125;</span><br><span class="line">	f = -f;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">max</span>(z,f) &lt;&lt; endl &lt;&lt; <span class="built_in">abs</span>(z - f) + <span class="number">1</span> &lt;&lt; endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -417,20 +406,20 @@ f\vert\)</span> + 1 中不同的 <span class="math inline">\(b_1\)</span>结果�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

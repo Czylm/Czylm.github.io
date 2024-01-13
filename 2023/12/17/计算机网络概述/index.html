@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"czylm.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统 资源共享：软件、硬件、数据 核心部分：通信线路和交换设备 边缘部分：独立功能的多台计算机  主机A与主机B通信，实际上就是指：进程与进程进行的通信。 主机之间的两者通信方式： 1.C&#x2F;S 客户&#x2F;服务器方式 描述的是进程之间服务与被服务的关系 2.P2P">
+  <meta name="description" content="计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统资源共享：软件、硬件、数据核心部分：通信线路和交换设备边缘部分：独立功能的多台计算机 主机A与主机B通信，实际上就是指：进程与进程进行的通信。 主机之间的两者通信方式：1.C&#x2F;S 客户&#x2F;服务器方式描述的是进程之间服务与被服务的关系2.P2P 对等连接方式不区分服务请">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络概述">
 <meta property="og:url" content="https://czylm.github.io/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="欢迎回家~">
-<meta property="og:description" content="计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统 资源共享：软件、硬件、数据 核心部分：通信线路和交换设备 边缘部分：独立功能的多台计算机  主机A与主机B通信，实际上就是指：进程与进程进行的通信。 主机之间的两者通信方式： 1.C&#x2F;S 客户&#x2F;服务器方式 描述的是进程之间服务与被服务的关系 2.P2P">
+<meta property="og:description" content="计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统资源共享：软件、硬件、数据核心部分：通信线路和交换设备边缘部分：独立功能的多台计算机 主机A与主机B通信，实际上就是指：进程与进程进行的通信。 主机之间的两者通信方式：1.C&#x2F;S 客户&#x2F;服务器方式描述的是进程之间服务与被服务的关系2.P2P 对等连接方式不区分服务请">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://czylm.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image.png">
 <meta property="og:image" content="https://czylm.github.io/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image-1.png">
@@ -261,7 +261,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -280,83 +280,95 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统
-资源共享：软件、硬件、数据 核心部分：通信线路和交换设备
-边缘部分：独立功能的多台计算机 <img src="\计算机网络概述/image.png"></p>
+        <p>计算机网络：利用通信线路和交换设备将地理位置分散的、具有独立功能的多台计算机连接起来，按照某种协议进行数据通信、实现资源共享的信息系统<br>资源共享：软件、硬件、数据<br>核心部分：通信线路和交换设备<br>边缘部分：独立功能的多台计算机<br><img src="\计算机网络概述/image.png" alt></p>
 <p>主机A与主机B通信，实际上就是指：进程与进程进行的通信。</p>
-<p>主机之间的两者通信方式： 1.C/S 客户/服务器方式
-描述的是进程之间服务与被服务的关系 2.P2P 对等连接方式
-不区分服务请求方和提供方，运行P2P软件，进行对等连接通信，本质上双方都是客户又是服务器</p>
-<p>计算机网络分类 1.分布范围：广域网WAM 跨国，城域网MAN
-城市范围，局域网LAN 一个教学楼等，个域网PAN 个人几米范围之内
-2.使用者：公用网 专用网 3.拓扑结构 总线型 星型 环型 网状型
-4.数据交换：电路交换 报文交换 分组交换
-报文交换和分组交换都是存储转发方式（先存再发）</p>
-<p>电路交换：通话全部时间，两个用户始终占用端到端的通信资源
-缺点：通信线路利用率低</p>
+<p>主机之间的两者通信方式：<br>1.C/S 客户/服务器方式<br>描述的是进程之间服务与被服务的关系<br>2.P2P 对等连接方式<br>不区分服务请求方和提供方，运行P2P软件，进行对等连接通信，本质上双方都是客户又是服务器</p>
+<p>计算机网络分类<br>1.分布范围：广域网WAM 跨国，城域网MAN 城市范围，局域网LAN 一个教学楼等，个域网PAN 个人几米范围之内<br>2.使用者：公用网 专用网<br>3.拓扑结构 总线型 星型 环型 网状型<br>4.数据交换：电路交换 报文交换 分组交换<br>报文交换和分组交换都是存储转发方式（先存再发）</p>
+<p>电路交换：通话全部时间，两个用户始终占用端到端的通信资源<br>缺点：通信线路利用率低</p>
 <p>报文：要发送的整块数据称为一个报文</p>
-<p>报文交换是整个报文到下一个路由器存储再进行转发，而分组交换是，报文的一个数据段，包，每一个都独立进行存储和转发
-分层体系结构</p>
-<p>OSI参考模型 实体：每一个层次就叫一个实体
-协议：这一层次应该遵守哪些规则 下层为上层提供服务</p>
-<p>互联网服务提供者 ISP 所谓的上网，就是通过某ISP
-获取所需的IP地址，以通过该ISP接入互联网</p>
-<p>计算机网络的性能(重点) 1.速率
-&gt;数据的传送速率，又叫数据率或者比特率。提到网络的速率时，往往指的是额定速率或标称速率
-单位为 bit/s b/s bps 数据率一般是 B KB MB 速率一般是 b/s kb/s Mb/s</p>
-<p>2.带宽
-&gt;有两种含义，第一种是，某个信号具有的频带宽度，即占据的频率范围单位是赫兹，<strong>某信道允许通过的信号频率范围称为该信道的带宽</strong>
-第二种含义是，
-<strong>在计算机网络中，带宽用来表示在单位时间内网络中的某信道所能通过的“最高数据率”</strong>，表示某通道传送数据的能力，单位为
-bit/s</p>
+<p>报文交换是整个报文到下一个路由器存储再进行转发，而分组交换是，报文的一个数据段，包，每一个都独立进行存储和转发<br>分层体系结构</p>
+<p>OSI参考模型<br>实体：每一个层次就叫一个实体<br>协议：这一层次应该遵守哪些规则<br>下层为上层提供服务</p>
+<p>互联网服务提供者 ISP<br>所谓的上网，就是通过某ISP 获取所需的IP地址，以通过该ISP接入互联网</p>
+<p>计算机网络的性能(重点)<br>1.速率</p>
+<blockquote>
+<p>数据的传送速率，又叫数据率或者比特率。提到网络的速率时，往往指的是额定速率或标称速率<br>单位为 bit/s b/s bps<br>数据率一般是 B KB MB<br>速率一般是 b/s kb/s Mb/s</p>
+</blockquote>
+<p>2.带宽</p>
+<blockquote>
+<p>有两种含义，第一种是，某个信号具有的频带宽度，即占据的频率范围单位是赫兹，<strong>某信道允许通过的信号频率范围称为该信道的带宽</strong><br>第二种含义是， <strong>在计算机网络中，带宽用来表示在单位时间内网络中的某信道所能通过的“最高数据率”</strong>，表示某通道传送数据的能力，单位为 bit/s</p>
+</blockquote>
 <p>小写单位是1000，大写单位是1024</p>
-<p>3.吞吐量 &gt;表示在单位时间内通过某个网络（信道、接口）的实际数据量
-受网络的带宽或网络的额定速率限制</p>
-<p>4.时延
-&gt;数据（一个报文或分组甚至比特）从网络或链路的一端传送到另一端所需的时间</p>
-<p>主要有四部分组成： (1).发送时延
-&gt;主机或路由器发送数据所需要的时间，也就是从发送数据的第一个比特算起，到发完该数据的最后一个比特为止所需的时间
-计算公式：<span class="math inline">\(\frac{数据帧长度(bit)}{发送速率(bit/s)}\)</span></p>
-<p>(2).传输时延 &gt;是电磁波在信道中传播一定距离需要花费的时间。
-计算公式：<span class="math inline">\(\frac{信道长度(m)}{电磁波在信道上的传播速率(m/s)}\)</span></p>
-<p>(3).处理时延 (4).排队时延</p>
-<p><img src="/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image-1.png"></p>
+<p>3.吞吐量</p>
+<blockquote>
+<p>表示在单位时间内通过某个网络（信道、接口）的实际数据量<br>受网络的带宽或网络的额定速率限制</p>
+</blockquote>
+<p>4.时延</p>
+<blockquote>
+<p>数据（一个报文或分组甚至比特）从网络或链路的一端传送到另一端所需的时间</p>
+</blockquote>
+<p>主要有四部分组成：<br>(1).发送时延 </p>
+<blockquote>
+<p>主机或路由器发送数据所需要的时间，也就是从发送数据的第一个比特算起，到发完该数据的最后一个比特为止所需的时间<br>计算公式：$\frac{数据帧长度(bit)}{发送速率(bit/s)}$</p>
+</blockquote>
+<p>(2).传输时延</p>
+<blockquote>
+<p>是电磁波在信道中传播一定距离需要花费的时间。<br>计算公式：$\frac{信道长度(m)}{电磁波在信道上的传播速率(m/s)}$</p>
+</blockquote>
+<p>(3).处理时延<br>(4).排队时延</p>
+<p><img src="/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image-1.png" alt></p>
 <p>总时延 = 发送 + 传播 + 处理 + 排队</p>
-<p>5.时延带宽积 &gt;传播时延和带宽相乘
-链路的时延带宽积表示这样的链路可以容纳多少个比特</p>
-<p><img src="/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image-2.png"></p>
-<p>6.往返时间RTT
-&gt;从发送方发送完数据到发送方收到接收方的确认所经过的时间，双向交互一次的时间</p>
-<p>有效数据率 = <span class="math inline">\(\frac{数据长度}{发送时间+RTT}\)</span></p>
-<p>7.利用率 &gt;信道利用率和网络利用率</p>
-<p>(1).信道利用率 &gt;某信道有百分之几的时间是被利用的
-完全空闲的信道的利用率是0</p>
-<p>(2).网络利用率 &gt;全网络的信道利用率的加权平均值</p>
-<p>网络当前的时延 = <span class="math inline">\(\frac{网络空闲的时延}{1
-- 网络当前的利用率}\)</span></p>
+<p>5.时延带宽积</p>
+<blockquote>
+<p>传播时延和带宽相乘<br>链路的时延带宽积表示这样的链路可以容纳多少个比特</p>
+</blockquote>
+<p><img src="/2023/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/image-2.png" alt></p>
+<p>6.往返时间RTT</p>
+<blockquote>
+<p>从发送方发送完数据到发送方收到接收方的确认所经过的时间，双向交互一次的时间</p>
+</blockquote>
+<p>有效数据率 = $\frac{数据长度}{发送时间+RTT}$</p>
+<p>7.利用率</p>
+<blockquote>
+<p>信道利用率和网络利用率</p>
+</blockquote>
+<p>(1).信道利用率</p>
+<blockquote>
+<p>某信道有百分之几的时间是被利用的<br>完全空闲的信道的利用率是0</p>
+</blockquote>
+<p>(2).网络利用率</p>
+<blockquote>
+<p>全网络的信道利用率的加权平均值</p>
+</blockquote>
+<p>网络当前的时延 = $\frac{网络空闲的时延}{1 - 网络当前的利用率}$</p>
 <p>当信道利用率增大时，引起的时延迅速增大。</p>
 <p>信道利用率或网络利用率过高就会产生非常大的时延，因此一般要控制信道利用率不超过50%，如果超过了，就要准备扩容，增大线路的宽度</p>
-<p>丢包率
-&gt;分组丢失率，在一定时间范围内，传输过程中丢失的分组数量与总分组数量的比率</p>
-<p>计算机网络的非性能特征 1.费用 2.质量 3.标准化 4.可靠性
-5.可扩展性和可升级性 6.易于管理和维护等</p>
-<p>计算机网络体系结构 五层协议的体系结构 (1).应用层
-&gt;通过应用进程的交互来完成特定网络应用 交互的数据单元：报文
-常用协议：域名系统DNS，支持万维网应用的HTTP协议，支持电子邮件的SMTP协议</p>
+<p>丢包率</p>
+<blockquote>
+<p>分组丢失率，在一定时间范围内，传输过程中丢失的分组数量与总分组数量的比率</p>
+</blockquote>
+<p>计算机网络的非性能特征<br>1.费用 2.质量 3.标准化 4.可靠性 5.可扩展性和可升级性 6.易于管理和维护等</p>
+<p>计算机网络体系结构<br>五层协议的体系结构<br>(1).应用层</p>
+<blockquote>
+<p>通过应用进程的交互来完成特定网络应用<br>交互的数据单元：报文<br>常用协议：域名系统DNS，支持万维网应用的HTTP协议，支持电子邮件的SMTP协议</p>
+</blockquote>
 <p><strong>应用层协议定义的是应用进程间通信和交互的规则，对于不同的网络应用需要有不同的应用层协议</strong></p>
-<p>(2).运输层
-&gt;为两台主机中进程之间的通信提供通用的数据传输服务(通用：多种应用可以使用同一个运输层服务)
-复用：多个应用层可同时使用下面运输层的服务
-分用：运输层把收到的信息分别交付上面的应用层中的相应过程
-主要协议：传输控制协议TCP(提供面向连接的、可靠的数据传输服务，其数据传输的单元是报文段)
-用户数据报协议UDP(提供无连接的尽最大努力的数据传输服务，但不保证数据传输的可靠性，其数据传输的单元是用户数据报)</p>
+<p>(2).运输层</p>
+<blockquote>
+<p>为两台主机中进程之间的通信提供通用的数据传输服务(通用：多种应用可以使用同一个运输层服务)<br>复用：多个应用层可同时使用下面运输层的服务<br>分用：运输层把收到的信息分别交付上面的应用层中的相应过程<br>主要协议：传输控制协议TCP(提供面向连接的、可靠的数据传输服务，其数据传输的单元是报文段)<br>用户数据报协议UDP(提供无连接的尽最大努力的数据传输服务，但不保证数据传输的可靠性，其数据传输的单元是用户数据报)</p>
+</blockquote>
 <p><strong>报文段通常指起始点和目的地都是传输层的信息单元，数据报指面向无连接的数据传输，分别对于TCP和UDP，艺可称他们为数据段</strong></p>
-<p>(3).网络层 &gt;负责为分组交换网上的不同主机提供通信服务
-数据单元：分组或数据报 常用协议：忘记协议IP和许多路由选择协议</p>
-<p>(4).数据链路层
-&gt;在两个相邻的节点之间传送数据帧(将网络层下来的IP数据报组装成帧，每一帧包括数据和必要的控制信息)。
-常用协议：PPP、CSMA/CD等 如发现错误，就简单的丢弃出错的帧</p>
-<p>(5).物理层 &gt;任务：实现比特(0/1)的传输 数据单元：比特</p>
+<p>(3).网络层</p>
+<blockquote>
+<p>负责为分组交换网上的不同主机提供通信服务<br>数据单元：分组或数据报<br>常用协议：忘记协议IP和许多路由选择协议</p>
+</blockquote>
+<p>(4).数据链路层</p>
+<blockquote>
+<p>在两个相邻的节点之间传送数据帧(将网络层下来的IP数据报组装成帧，每一帧包括数据和必要的控制信息)。<br>常用协议：PPP、CSMA/CD等<br>如发现错误，就简单的丢弃出错的帧</p>
+</blockquote>
+<p>(5).物理层</p>
+<blockquote>
+<p>任务：实现比特(0/1)的传输<br>数据单元：比特</p>
+</blockquote>
 
     </div>
 
@@ -472,20 +484,20 @@ bit/s</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
